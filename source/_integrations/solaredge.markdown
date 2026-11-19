@@ -7,24 +7,16 @@ ha_domain: solaredge
 The **SolarEdge** {% term integration %} allows you to get details from your SolarEdge solar power setup and integrate these in your Home Assistant installation.
 It provides two main features:
 
-1.  Site sensors: Provide real-time energy data for your entire site. For example, current power, energy today, and lifetime energy. If your site includes one or more SolarEdge batteries, additional sensors for battery state of charge, power, and daily charge/discharge energy are also created. This requires a site ID and an API key.
+1.  Site sensors: Provide real-time energy data for your entire site. For example, current power, energy today, and lifetime energy. If your site includes one or more SolarEdge batteries, additional sensors for battery state of charge, power, and daily charge/discharge energy are also created. These sensors are currently unavailable because SolarEdge retired the API they use.
 2.  Module-level statistics: Retrieves energy production data per inverter, string, and module, and inserts it into Home Assistant statistics. This is useful for identifying underperforming modules. This requires a site ID, username, and password.
-
-You can configure either feature individually or both at the same time for the same site.
 
 {% include integrations/config_flow.md %}
 
 ## Site sensors (API key)
 
-To get sensors for your installation, you need your installation's site ID and an API key. You can get these by logging in to your [SolarEdge web portal](https://monitoring.solaredge.com/). Note: if your portal is not in English, the labels will be different.
+Site sensors rely on SolarEdge Monitoring API V1, which SolarEdge has retired. The credentials from the SolarEdge Developer Platform require API V2 support in Home Assistant. Follow the [API V2 migration issue](https://github.com/home-assistant/core/issues/185245) for progress.
 
-1. Go to **Admin** > **Site Access** > **Access Control** > **API Access**.
-2. Select **Generate key**.
-3. Select **Save**.
-
-Access to **API Access** depends on the permissions assigned to your SolarEdge account. If **Admin** is not available, contact your installer or SolarEdge site administrator to obtain access or the API key.
-
-Sensor data is updated every 15 minutes to stay within the daily rate limit of 300 requests per day.
+You can still set up [module-level statistics](#module-level-statistics-username--password) using your SolarEdge Monitoring Portal username and password. Leave the API key field empty when setting up module-level statistics.
 
 ## Module-level statistics (username & password)
 
